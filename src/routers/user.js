@@ -5,6 +5,7 @@ const router = new express.Router();
 const multer = require("multer");
 const { findOne, findById } = require("../models/task");
 const sharp = require("sharp");
+const sendWelcomeEmail = require("../utils/resend");
 
 const upload = multer({
   limits: {
@@ -22,6 +23,7 @@ router.post("/users", async (req, res) => {
   try {
     const user = new User(req.body);
     const token = await user.generateAuthToken();
+    await sendWelcomeEmail(user.name, user.email);
     user.save().then(() => {
       res.status(201);
       res.send({ user, token });
@@ -91,23 +93,22 @@ router.get("/users/:id", (req, res) => {
 });
 
 router.patch("/users/me", auth, (req, res) => {
-
-    const updates = Object.keys(req.body);
-    const allowedUpdates = ["name", "email", "password", "age"];
-    const isValidOperation = updates.every((update) =>
+  const updates = Object.keys(req.body);
+  const allowedUpdates = ["name", "email", "password", "age"];
+  const isValidOperation = updates.every((update) =>
     allowedUpdates.includes(update)
-    );
-    
-    if (!isValidOperation) {
-      return res.status(404).send("Update Not Allowed");
-    }
+  );
+
+  if (!isValidOperation) {
+    return res.status(404).send("Update Not Allowed");
+  }
 
   try {
     User.findById(req.user.id).then((user) => {
       if (!user) {
         return res.status(404).send("Not Found");
       }
-      
+
       updates.forEach((update) => {
         user[update] = req.body[update];
       });
@@ -128,24 +129,26 @@ router.delete("/users/me", auth, async (req, res) => {
 });
 
 router.post(
-  "/users/me/avatar", auth, upload.single("upload"), async (req, res) => {
+  "/users/me/avatar",
+  auth,
+  upload.single("upload"),
+  async (req, res) => {
     try {
-
       const buffer = await sharp(req.file.buffer)
-      .resize({ width: 250, height: 250 })
-      .png()
-      .toBuffer();
-      
+        .resize({ width: 250, height: 250 })
+        .png()
+        .toBuffer();
+
       req.user.avatar = buffer;
-      
+
       await req.user.save();
       res.send(req.user);
-    } catch(e) {
-      res.status(500).send()
-    }} ,
-    (error, req, res, next) => {
-      res.status(405).send({ error: error.message });
-
+    } catch (e) {
+      res.status(500).send();
+    }
+  },
+  (error, req, res, next) => {
+    res.status(405).send({ error: error.message });
   }
 );
 
