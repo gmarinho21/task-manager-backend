@@ -13,7 +13,7 @@ app.use(express.json());
 app.use(userRouter);
 app.use(taskRouter);
 
-router.post("/", async (req, res) => {
+app.get("/", async (req, res) => {
 
     res.status(200).send({message: "ok"});
   
