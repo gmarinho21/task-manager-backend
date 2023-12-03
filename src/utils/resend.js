@@ -10,11 +10,8 @@ const sendWelcomeEmail = async function (registeredName, registeredEmail) {
       subject: "Welcome!",
       html: `<strong>${registeredName}, thank you for registering!</strong>`,
     });
-
-    console.log(data);
   } catch (error) {
-    console.error(error);
-    console.log(error);
+    console.error(error);;
   }
 };
 

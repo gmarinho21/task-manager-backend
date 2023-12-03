@@ -40,7 +40,6 @@ router.post("/users/login", async (req, res) => {
       req.body.email,
       req.body.password
     );
-    console.log("i'm erroring here")
     const token = await user.generateAuthToken();
     res.send({ user, token });
   } catch (e) {
@@ -165,8 +164,8 @@ router.get("/users/:id/avatar", async (req, res) => {
     if (!user && !user.avatar) {
       throw new Error();
     }
-
     res.set("Content-Type", "image/png");
+    console.log(user.avatar)
     res.send(user.avatar);
   } catch (e) {
     res.status(404).send();
