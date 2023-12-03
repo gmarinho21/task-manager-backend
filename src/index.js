@@ -13,6 +13,14 @@ app.use(express.json());
 app.use(userRouter);
 app.use(taskRouter);
 
+router.post("/", async (req, res) => {
+
+    res.status(200).send({message: "ok"});
+  
+});
+
+
+
 app.listen(port, () => {
   console.log("Server is up on port " + port);
 });
