@@ -21,6 +21,10 @@ const taskSchema = new mongoose.Schema(
       required: false,
       ref: "Project",
     },
+    promisedTime: {
+      type: Date,
+      required: false,
+    },
   },
   {
     timestamps: true,
