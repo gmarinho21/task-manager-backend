@@ -165,7 +165,6 @@ router.get("/users/:id/avatar", async (req, res) => {
       throw new Error();
     }
     res.set("Content-Type", "image/png");
-    console.log(user.avatar)
     res.send(user.avatar);
   } catch (e) {
     res.status(404).send();

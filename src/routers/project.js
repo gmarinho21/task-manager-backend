@@ -27,6 +27,7 @@ router.get("/projects", auth, async (req, res) => {
       sort,
     });
     if (!projects) {
+      console.log("Nenhum Projeto encontrado");
       return res.status(404).send();
     }
     res.status(200).send(projects);
