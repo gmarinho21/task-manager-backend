@@ -29,6 +29,10 @@ router.get("/tasks", auth, async (req, res) => {
     sort[parts[0]] = parts[1] === "desc" ? -1 : 1;
   }
 
+  if (req.query.project) {
+    match.project = req.query.project;
+  }
+
   try {
     const tasks = await Task.find(match, null, {
       limit: req.query.limit,
