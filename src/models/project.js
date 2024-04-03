@@ -9,7 +9,12 @@ const projectSchema = new mongoose.Schema(
     },
     description: {
       type: String,
-      trim: true
+      trim: true,
+    },
+    owner: {
+      type: mongoose.Schema.Types.ObjectId,
+      required: true,
+      ref: "User",
     },
   },
   {
@@ -18,10 +23,10 @@ const projectSchema = new mongoose.Schema(
 );
 
 projectSchema.virtual("tasks", {
-    ref: "Task",
-    localField: "_id",
-    foreignField: "project",
-  });
+  ref: "Task",
+  localField: "_id",
+  foreignField: "project",
+});
 
 const Project = mongoose.model("Project", projectSchema);
 

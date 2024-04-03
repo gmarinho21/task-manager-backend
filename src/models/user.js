@@ -63,6 +63,12 @@ userSchema.virtual("tasks", {
   foreignField: "owner",
 });
 
+userSchema.virtual("projects", {
+  ref: "Project",
+  localField: "_id",
+  foreignField: "owner",
+});
+
 // Hash the plain text pasword before saving
 userSchema.pre("save", async function (next) {
   const user = this;
