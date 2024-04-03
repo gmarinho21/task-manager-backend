@@ -13,6 +13,7 @@ app.use(cors());
 app.use(express.json());
 app.use(userRouter);
 app.use(taskRouter);
+app.use(projectRouter);
 
 app.get("/", async (req, res) => {
   res.status(200).send({ message: "ok" });
