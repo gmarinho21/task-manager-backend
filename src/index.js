@@ -8,7 +8,13 @@ var cors = require("cors");
 const app = express();
 const port = process.env.PORT || 3000;
 
+
+var corsOptions = {
+  origin: 'http://gabrielm.com.br'
+}
+
 app.use(cors());
+
 
 app.use(express.json());
 app.use(userRouter);
