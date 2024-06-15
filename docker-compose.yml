@@ -1,0 +1,30 @@
+services:
+  backend:
+    restart: always
+    build: ./
+    volumes:
+      - ./:/usr/src
+    depends_on:
+      - mongo
+    networks:
+      - express-mongo
+    ports:
+      - 3000:3000
+    expose: 
+      - 3000
+  mongo:
+    restart: always
+    image: mongo:4.2.0
+    volumes:
+      - mongo_data:/data/db
+    networks:
+      - express-mongo
+    ports:
+      - 27017:27017
+    expose:
+      - 27017
+networks:
+  express-mongo:
+
+volumes:
+  mongo_data:
