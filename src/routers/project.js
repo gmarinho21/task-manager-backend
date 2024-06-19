@@ -36,4 +36,20 @@ router.get("/projects", auth, async (req, res) => {
   }
 });
 
+router.delete("/projects/:id", auth, async (req, res) => {
+  try {
+    const projects = await Project.findOneAndDelete({
+      _id: req.params.id,
+      owner: req.user._id,
+    });
+
+    if (!projects) {
+      return res.status(404).send();
+    }
+    res.status(200).send(projects);
+  } catch (e) {
+    res.status(500).send();
+  }
+});
+
 module.exports = router;
