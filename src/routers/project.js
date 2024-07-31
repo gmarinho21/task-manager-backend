@@ -52,4 +52,32 @@ router.delete("/projects/:id", auth, async (req, res) => {
   }
 });
 
+router.patch("/projects/:id", auth, async (req, res) => {
+  const updates = Object.keys(req.body);
+  const allowedUpdates = ["description", "name"];
+  const isValidOperation = updates.every((update) =>
+    allowedUpdates.includes(update)
+  );
+
+  if (!isValidOperation) {
+    return res.status(404).send("Update Not Allowed");
+  }
+  try {
+    const project = await Project.findOne({
+      _id: req.params.id,
+      owner: req.user._id,
+    });
+
+    if (!project) {
+      return res.status(404).send();
+    }
+    updates.forEach((update) => (project[update] = req.body[update]));
+
+    await project.save();
+    res.send(project);
+  } catch (e) {
+    res.status(401).send(e);
+  }
+});
+
 module.exports = router;

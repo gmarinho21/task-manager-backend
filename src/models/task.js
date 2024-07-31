@@ -30,6 +30,26 @@ const taskSchema = new mongoose.Schema(
       type: Date,
       required: false,
     },
+    startTime: {
+      type: Date,
+      required: false,
+    },
+    endTime: {
+      type: Date,
+      required: false,
+    },
+    progress: {
+      type: Number,
+      required: false,
+    },
+    dependencies: [
+      {
+        dependencies: {
+          type: mongoose.Schema.Types.ObjectId,
+          required: false,
+        },
+      },
+    ],
   },
   {
     timestamps: true,
