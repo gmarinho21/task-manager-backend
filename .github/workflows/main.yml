@@ -36,14 +36,14 @@ jobs:
             gmarinho21/tasg-backend:${{ steps.generate_sha.outputs.sha}}
             gmarinho21/tasg-backend:latest
 
-      # - name: Update image deployment
-      #   uses: fjogeleit/yaml-update-action@main
-      #   with:
-      #     branch: release
-      #     targetBranch: main
-      #     createPR: true
-      #     valueFile: 'k8s/deployment.yaml'
-      #     propertyPath: 'spec.template.spec.containers.image'
-      #     value: ${{ steps.generate_sha.outputs.sha }}
-      #     commitChange: true
-      #     message: "[skip ci] Update tag in values helm"
+      - name: Update image deployment
+        uses: fjogeleit/yaml-update-action@main
+        with:
+          branch: release
+          targetBranch: main
+          createPR: true
+          valueFile: "k8s/deployment.yaml"
+          propertyPath: "spec.template.spec.containers.image"
+          value: ${{ steps.generate_sha.outputs.sha }}
+          commitChange: true
+          message: "[skip ci] Update tag in values helm"
