@@ -16,7 +16,7 @@ spec:
     spec:
       containers:
         - name: tasg-backend
-          image: gmarinho21/tasg-backend:5a85dba
+          image: gmarinho21/tasg-backend:b321790
           ports:
             - containerPort: 3000
           resources:
