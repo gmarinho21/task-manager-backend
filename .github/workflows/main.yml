@@ -47,3 +47,4 @@ jobs:
           value: ${{ steps.generate_sha.outputs.sha }}
           commitChange: true
           message: "[skip ci] Update tag in values helm"
+          token: ${{ secrets.GITHUB_TOKEN }}
