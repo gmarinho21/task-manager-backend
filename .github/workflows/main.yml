@@ -36,6 +36,11 @@ jobs:
             gmarinho21/tasg-backend:${{ steps.generate_sha.outputs.sha}}
             gmarinho21/tasg-backend:latest
 
+      - name: Validate Existing Image
+        run: |
+          IMAGE=$(yq eval '.spec.template.spec.containers.image' k8s/deployment.yaml)
+          echo "Current Image: $IMAGE"
+
       - name: Update image deployment
         uses: fjogeleit/yaml-update-action@main
         with:
@@ -43,7 +48,7 @@ jobs:
           targetBranch: main
           createPR: true
           valueFile: "k8s/deployment.yaml"
-          propertyPath: "spec.template.spec.containers.image"
+          propertyPath: "spec.template.spec.containers[0].image"
           value: gmarinho21/tasg-backend:${{ steps.generate_sha.outputs.sha }}
           commitChange: true
           message: "[skip ci] Update tag in values helm"
