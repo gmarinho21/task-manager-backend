@@ -44,7 +44,7 @@ jobs:
           createPR: true
           valueFile: "k8s/deployment.yaml"
           propertyPath: "spec.template.spec.containers.image"
-          value: ${{ steps.generate_sha.outputs.sha }}
+          value: gmarinho21/tasg-backend:${{ steps.generate_sha.outputs.sha }}
           commitChange: true
           message: "[skip ci] Update tag in values helm"
           token: ${{ secrets.GITHUB_TOKEN }}
