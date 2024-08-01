@@ -1,0 +1,30 @@
+apiVersion: apps/v1
+kind: Deployment
+
+metadata:
+  name: tasg-backend-deployment
+  labels:
+    app: tasg
+
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: tasg
+  template:
+    metadata:
+      labels:
+        app: tasg-backend
+    spec:
+      containers:
+        - name: tasg-backend
+          image: gmarinho21/tasg-backend:5a85dba
+          ports:
+            - containerPort: 3000
+          resources:
+            requests:
+              cpu: 200m
+              memory: 300Mi
+            limits:
+              cpu: 300m
+              memory: 500Mi
