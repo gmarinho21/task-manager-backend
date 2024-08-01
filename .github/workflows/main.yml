@@ -39,7 +39,7 @@ jobs:
       - name: Update image deployment
         uses: fjogeleit/yaml-update-action@main
         with:
-          branch: release
+          branch: main
           targetBranch: main
           createPR: true
           valueFile: "k8s/deployment.yaml"
