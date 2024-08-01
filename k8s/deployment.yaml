@@ -8,15 +8,15 @@ spec:
   replicas: 1
   selector:
     matchLabels:
-      app: tasg-backend  # Ensure this matches the template's labels
+      app: tasg-backend # Ensure this matches the template's labels
   template:
     metadata:
       labels:
-        app: tasg-backend  # Consistent labels
+        app: tasg-backend # Consistent labels
     spec:
       containers:
         - name: tasg-backend
-          image: gmarinho21/tasg-backend:b321790
+          image: gmarinho21/tasg-backend:5676345
           ports:
             - containerPort: 3000
           resources:
