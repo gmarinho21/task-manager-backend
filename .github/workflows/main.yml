@@ -39,7 +39,7 @@ jobs:
       - name: Update image deployment
         uses: fjogeleit/yaml-update-action@main
         with:
-          branch: main
+          branch: release
           targetBranch: main
           createPR: true
           valueFile: "k8s/deployment.yaml"
@@ -48,8 +48,3 @@ jobs:
           commitChange: true
           message: "[skip ci] Update tag in values helm"
           token: ${{ secrets.GITHUB_TOKEN }}
-
-      - name: Validate Existing Image
-        run: |
-          IMAGE=$(yq eval '.spec.template.spec.containers[0].image' k8s/deployment.yaml)
-          echo "Current Image: $IMAGE"
