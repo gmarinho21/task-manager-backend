@@ -42,10 +42,7 @@ router.post("/users/login", async (req, res) => {
     );
     const token = await user.generateAuthToken();
     res.send({ user, token });
-
-    console.log("Logged / ran");
   } catch (e) {
-    console.log("Not logged / ran");
     res.status(401).send(e.message);
   }
 });

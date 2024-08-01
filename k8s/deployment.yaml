@@ -58,3 +58,8 @@ spec:
                 secretKeyRef:
                   name: tasg-backend-secret
                   key: RESEND_API_KEY
+            - name: ENVIRONMENT
+              valueFrom:
+                secretKeyRef:
+                  name: tasg-backend-secret
+                  key: ENVIRONMENT
