@@ -1,20 +1,18 @@
 apiVersion: apps/v1
 kind: Deployment
-
 metadata:
   name: tasg-backend-deployment
   labels:
     app: tasg
-
 spec:
   replicas: 1
   selector:
     matchLabels:
-      app: tasg
+      app: tasg-backend  # Ensure this matches the template's labels
   template:
     metadata:
       labels:
-        app: tasg-backend
+        app: tasg-backend  # Consistent labels
     spec:
       containers:
         - name: tasg-backend
@@ -28,3 +26,34 @@ spec:
             limits:
               cpu: 300m
               memory: 500Mi
+          env:
+            - name: PORT
+              valueFrom:
+                secretKeyRef:
+                  name: tasg-backend-secret
+                  key: PORT
+            - name: JWT_SECRET
+              valueFrom:
+                secretKeyRef:
+                  name: tasg-backend-secret
+                  key: JWT_SECRET
+            - name: DB_USER
+              valueFrom:
+                secretKeyRef:
+                  name: tasg-backend-secret
+                  key: DB_USER
+            - name: DB_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: tasg-backend-secret
+                  key: DB_PASSWORD
+            - name: DB_PATH
+              valueFrom:
+                secretKeyRef:
+                  name: tasg-backend-secret
+                  key: DB_PATH
+            - name: RESEND_API_KEY
+              valueFrom:
+                secretKeyRef:
+                  name: tasg-backend-secret
+                  key: RESEND_API_KEY
