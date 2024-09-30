@@ -17,7 +17,7 @@ router.post("/tasks", auth, async (req, res) => {
 });
 
 router.get("/tasks", auth, async (req, res) => {
-  const match = { owner: req.user._id };
+  const match = { owner: req.user._id.toString() };
   const sort = {};
 
   if (req.query.isCompleted) {
@@ -30,7 +30,7 @@ router.get("/tasks", auth, async (req, res) => {
   }
 
   if (req.query.project) {
-    match.project = req.query.project;
+    match.project = req.query.project.toString();
   }
 
   try {
