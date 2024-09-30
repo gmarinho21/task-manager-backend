@@ -17,7 +17,7 @@ spec:
       automountServiceAccountToken: false
       containers:
         - name: tasg-backend
-          image: gmarinho21/tasg-backend:a203f7c
+          image: gmarinho21/tasg-backend:2d89856
           imagePullPolicy: Always
           ports:
             - containerPort: 3000
@@ -28,7 +28,7 @@ spec:
             limits:
               cpu: 300m
               memory: 500Mi
-              ephemeral-storage: "2Gi"
+              ephemeral-storage: 2Gi
           env:
             - name: PORT
               valueFrom:
