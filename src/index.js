@@ -3,12 +3,12 @@ require("./db/mongoose");
 const userRouter = require("./routers/user");
 const taskRouter = require("./routers/task");
 const projectRouter = require("./routers/project");
-var cors = require("cors");
+const cors = require("cors");
 
 const app = express();
 const port = process.env.PORT || 3000;
 
-var corsOptions = {
+const corsOptions = {
   origin: "http://gabrielm.com.br",
 };
 
