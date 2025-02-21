@@ -21,4 +21,4 @@ Clone the Repository, then:
    npm run dev
 ```
 
-Note: For this to run correctly, you'll will also need to run de frontend AND setup a MongoDB instance 
+Note: For this to run correctly, you'll will also need to run the frontend AND setup a MongoDB instance 
